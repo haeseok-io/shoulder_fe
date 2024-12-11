@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+/* 버튼 색상 */
+.btn-light { background: #e4e4e4; color: #111827; }
+.btn-main { background: #6366f1; color: #fff; }
+.btn-active { background: #ff7745; color: #fff; }
