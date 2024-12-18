@@ -67,6 +67,9 @@
 <script>
     import { reactive } from 'vue';
     import BaseInput from './BaseInput.vue';
+    import axios from 'axios';
+    import store from '@/store/store';
+import router from '@/router';
 
     export default {
         name: "Login",
@@ -103,6 +106,19 @@
                 formData.append("password", data.password);
 
                 // Result
+                // this.store.dispatch('login', formData);
+                axios.post("/api/auth/login", formData)
+                    .then(( res ) => {
+                        const token = res.headers.authorization.split(" ")[1];
+                        store.commit('setToken', token);
+
+                        router.push({path: "/"});
+                    })
+                    .catch(error => {
+                        if( error.response.status == 400 ) {
+                            errors[error.response.data.target] = error.response.data.message;
+                        }
+                    });
                 
             };
 

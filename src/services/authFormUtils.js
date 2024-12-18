@@ -19,11 +19,9 @@ export const isEmailDuplicate = async value => {
 
     await axios.get("/api/auth/email/duplicate", {
         params: { email: value }
-    }).catch(error => 
-        errorMessage = error.response.data
-    );
-
-    console.log(errorMessage)
+    }).catch((error) => {
+        errorMessage = error.response.data.message;
+    });
 
     return errorMessage;
 }

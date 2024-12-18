@@ -15,7 +15,7 @@
                     </ul>
                 </nav>
                 <div class="util">
-                    <a href="" class="btn btn-primary" v-if="$store.state.account.id">
+                    <a href="" class="btn btn-primary" v-if="$store.state.token">
                         모임 등록하기
                     </a>
                     <div class="util-alram">
@@ -25,12 +25,13 @@
                     </div>
                     <div class="util-user">
                         <div class="user-toggle">
-                            <router-link to="/auth/login" v-if="!$store.state.account.id">
+                            <router-link to="/auth/login" v-if="!$store.state.token">
                                 <i class="bi bi-person-fill"></i>
                             </router-link>
                             <router-link to="/mypage" v-else>
                                 <i class="bi bi-person-fill"></i>
                             </router-link>
+                            <button @click="logout">로그아웃</button>
                         </div>
                     </div>
                 </div>
@@ -40,8 +41,17 @@
 </template>
 
 <script>
+import store from '@/store/store';
+
     export default {
-        name: 'Header'
+        name: 'Header',
+        setup() {
+            const logout = () => {
+                store.commit('setToken', null);
+            }
+
+            return { logout }
+        }
     }
 </script>
 
